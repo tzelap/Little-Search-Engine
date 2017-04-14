@@ -116,8 +116,9 @@ public class LittleSearchEngine {
 		Scanner sc = new Scanner(new File(docFile));
 		
 		while(sc.hasNext()){
-			String next = sc.nextLine();
+			String next = sc.next();
 			if(getKeyWord(next)!=null){
+				next = getKeyWord(next);
 				if(map.containsKey(next)){
 					Occurrence occur = map.get(next);
 					occur.frequency++;
@@ -141,6 +142,7 @@ public class LittleSearchEngine {
 	 * 
 	 * @param kws Keywords hash table for a document
 	 */
+	
 	public void mergeKeyWords(HashMap<String,Occurrence> kws) {
 		// COMPLETE THIS METHOD
 		for(Map.Entry<String, Occurrence> key: kws.entrySet()){
