@@ -187,7 +187,7 @@ public class LittleSearchEngine {
 		for(int i = 0; i <word.length(); i ++){
 			char c = word.charAt(i);
 			if(!Character.isLetter(c)){
-				nuWord = word.substring(0, i-1).toLowerCase();
+				nuWord = word.substring(0, i).toLowerCase();
 				break;
 			}
 		}
