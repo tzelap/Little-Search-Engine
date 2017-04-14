@@ -2,6 +2,7 @@ package search;
 
 import java.io.*;
 import java.util.*;
+import java.util.Map.Entry;
 
 /**
  * This class encapsulates an occurrence of a keyword in a document. It stores the
@@ -142,8 +143,21 @@ public class LittleSearchEngine {
 	 */
 	public void mergeKeyWords(HashMap<String,Occurrence> kws) {
 		// COMPLETE THIS METHOD
-		for(int i = 0; i<kws.size(); i++){
-			String key = kws.pu
+		for(Map.Entry<String, Occurrence> key: kws.entrySet()){
+			ArrayList<Occurrence>occur = new ArrayList<Occurrence>();
+			String keyStr = key.getKey();
+			if(keywordsIndex.containsKey(keyStr)){
+				occur = keywordsIndex.get(keyStr);
+				occur.add(kws.get(keyStr));
+				insertLastOccurrence(occur);
+				
+				
+			}
+			else{
+				occur.add(kws.get(keyStr));
+				
+			}
+			keywordsIndex.put(keyStr, occur);
 		}
 		
 	}
@@ -173,7 +187,7 @@ public class LittleSearchEngine {
 		for(int i = 0; i <word.length(); i ++){
 			char c = word.charAt(i);
 			if(!Character.isLetter(c)){
-				nuWord = word.substring(0, i).toLowerCase();
+				nuWord = word.substring(0, i-1).toLowerCase();
 				break;
 			}
 		}
@@ -243,7 +257,18 @@ public class LittleSearchEngine {
 			else if(occs.get(mid).frequency < last){
 				R = mid-1;
 			}
-			
+			else if(last == occs.get(mid).frequency){
+				break;
+			}
+		}
+		
+		Occurrence tmp = occs.remove(occs.size()-1);
+		int midFreq = occs.get(arrMid.get(arrMid.size()-1)).frequency;
+		if(last>=midFreq){
+			occs.add(arrMid.get(arrMid.size()-1), tmp);
+		}
+		else if (last < midFreq){
+			occs.add(arrMid.get(arrMid.size()-1) + 1, tmp);
 		}
 		return arrMid;
 		
