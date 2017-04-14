@@ -142,6 +142,10 @@ public class LittleSearchEngine {
 	 */
 	public void mergeKeyWords(HashMap<String,Occurrence> kws) {
 		// COMPLETE THIS METHOD
+		for(int i = 0; i<kws.size(); i++){
+			String key = kws.pu
+		}
+		
 	}
 	
 	/**
@@ -223,7 +227,27 @@ public class LittleSearchEngine {
 	public ArrayList<Integer> insertLastOccurrence(ArrayList<Occurrence> occs) {
 		// COMPLETE THIS METHOD
 		// THE FOLLOWING LINE HAS BEEN ADDED TO MAKE THE METHOD COMPILE
-		return null;
+		ArrayList<Integer> arrMid  = new ArrayList<Integer>();
+		if(occs.size() < 3){
+			return null;
+		}
+		int L = 0;
+		int R = occs.size()-2;
+		int last = occs.get(occs.size()-1).frequency;
+		while(L<=R){
+			int mid = (L+R)/2;
+			arrMid.add(mid);
+			if(occs.get(mid).frequency > last){
+				L = mid+1;
+			}
+			else if(occs.get(mid).frequency < last){
+				R = mid-1;
+			}
+			
+		}
+		return arrMid;
+		
+		
 	}
 	
 	/**
