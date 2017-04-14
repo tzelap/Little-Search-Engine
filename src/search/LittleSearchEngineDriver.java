@@ -40,6 +40,6 @@ public class LittleSearchEngineDriver
 //				System.out.println(lse.getKeyWord(input));
 //		}
 		
-		System.out.println(lse.top5search("deep", "world"));
+		System.out.println(lse.top5search("fuck", "faggots"));
 	}
 }

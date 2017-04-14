@@ -1,2 +1,15 @@
 AliceCh1.txt
 WowCh1.txt
+80days.txt
+BuddCh1.txt
+JaneCh1.txt
+TwoCh1.txt
+WomenCh1.txt
+new1.txt
+new2.txt
+new3.txt
+new4.txt
+new5.txt
+new6.txt
+new7.txt
+new8.txt

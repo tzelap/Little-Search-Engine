@@ -244,7 +244,7 @@ public class LittleSearchEngine {
 		// COMPLETE THIS METHOD
 		// THE FOLLOWING LINE HAS BEEN ADDED TO MAKE THE METHOD COMPILE
 		ArrayList<Integer> arrMid  = new ArrayList<Integer>();
-		if(occs.size() < 3){
+		if(occs.size() < 2){
 			return null;
 		}
 		int L = 0;
@@ -294,6 +294,92 @@ public class LittleSearchEngine {
 	public ArrayList<String> top5search(String kw1, String kw2) {
 		// COMPLETE THIS METHOD
 		// THE FOLLOWING LINE HAS BEEN ADDED TO MAKE THE METHOD COMPILE
-		return null;
+		ArrayList<String>top5 = new ArrayList<String>();
+		HashMap<String, Integer>list = new HashMap<String, Integer>();
+		for(int i = 0; i <keywordsIndex.get(kw1).size();i++){
+			Occurrence occKw1 = keywordsIndex.get(kw1).get(i);
+			String docKw1 = occKw1.document;
+			int freqKw1 = occKw1.frequency;
+			if(list.containsKey(docKw1)){
+				freqKw1 = freqKw1 + list.get(docKw1).intValue();
+				list.put(docKw1, freqKw1);
+			}
+			else{
+				list.put(docKw1, freqKw1);
+			}
+		}
+		for(int i = 0; i<keywordsIndex.get(kw2).size(); i++){
+			Occurrence occKw2 = keywordsIndex.get(kw2).get(i);
+			String docKw2 = occKw2.document;
+			int freqKw2 = occKw2.frequency;
+			if(list.containsKey(docKw2)){
+				freqKw2 = freqKw2 + list.get(docKw2).intValue();
+				list.put(docKw2,freqKw2);
+			}
+			else{
+				list.put(docKw2, freqKw2);
+			}
+		}
+		top5 = binarySort(list);
+		while(top5.size()>5){
+			top5.remove(5);
+		}
+		return top5;
+		
+	}
+	private ArrayList<String>binarySort(HashMap<String,Integer>map){
+		ArrayList<String>sorted = new ArrayList<String>();
+		if(map.size() == 0){
+			return null;
+		}
+		if(map.size() == 1){
+			String keyStr = map.keySet().toString();
+			keyStr = keyStr.substring(1, keyStr.length()-1);
+			sorted.add(keyStr);
+			return sorted;
+		}
+		
+		
+		for(Map.Entry<String, Integer> key : map.entrySet()){
+			String keyStr = key.getKey();
+			sorted.add(keyStr);
+			if(!(sorted.size()<2)){
+				
+				int L = 0;
+				int R = sorted.size()-2;
+				int val = map.get(keyStr).intValue();
+				int mid = 0;
+				while(L<=R){
+					mid = (L+R)/2;
+					String midKey = sorted.get(mid);
+					int midKeyVal = map.get(midKey).intValue();
+					if(val>midKeyVal){
+						R = mid -1;
+					}
+					else if(val < midKeyVal){
+						L = mid+1;
+					}
+					else if(val == midKeyVal){
+						break;
+					}
+				}
+				String midKey = sorted.get(mid);
+				int midKeyVal = map.get(midKey).intValue();
+				String tmpKey = sorted.remove(sorted.size()-1);
+				if(val>= midKeyVal){
+					sorted.add(mid, tmpKey);
+				}
+				if(val<midKeyVal){
+					sorted.add(mid+1,tmpKey);
+				}
+				
+				
+					
+			}
+			
+		}
+		
+		
+		return sorted;
 	}
 }
