@@ -304,6 +304,7 @@ public class LittleSearchEngine {
 			list1.add(occKw1);
 			mapu.put(occKw1.document, occKw1);
 		}
+		
 		for(int i = 0; i <keywordsIndex.get(kw2).size(); i++){
 			Occurrence occKw2 = keywordsIndex.get(kw2).get(i);
 			String doc = occKw2.document;
@@ -321,13 +322,13 @@ public class LittleSearchEngine {
 		
 			
 		}
+		
 		list1.addAll(list2);
 		masterList.addAll(list1);
-		//System.out.println("list "+masterList.toString());
-		//System.out.println(mapu.toString());
+		
 		top5 = sorter(masterList, mapu);
-		if(top5.size()>5){
-			top5.subList(0, 5);
+		while(top5.size()>5){
+			top5.remove(5);
 		}
 		return top5;
 		

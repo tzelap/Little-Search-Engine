@@ -41,6 +41,6 @@ public class LittleSearchEngineDriver
 //		}
 		
 		
-		System.out.println(lse.top5search("fuck", "faggots"));
+		System.out.println(lse.top5search("round", "swarm"));
 	}
 }
